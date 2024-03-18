@@ -1,3 +1,28 @@
+.nav-item.active a {
+  border-bottom: 4px solid black;
+  border-radius: 50% 0 0;
+}
+nav {
+  z-index: 10;
+  min-height: 55px;
+}
 
+@media (max-width: 990px) {
+  li a {
+    margin: 0 50px;
+    width: fit-content;
+  }
+  .joinUs {
+    padding: 10px 0px;
+    width: fit-content;
+  }
+  .links {
+    flex-direction: column;
+  }
+}
 
-      
+@media (min-width: 1120px) {
+  .container-fluid {
+    width: 90%;
+  }
+}

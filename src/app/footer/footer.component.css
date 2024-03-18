@@ -1,0 +1,9 @@
+footer {
+  background-image: url(../../assets/images/Landpage/Footer/Layer-53.png);
+  position: relative;
+  bottom: 0;
+}
+
+.container-fluid {
+  width: 90%;
+}
