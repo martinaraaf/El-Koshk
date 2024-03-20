@@ -1,0 +1,18 @@
+section {
+  /* background-color: #3c1f7c; */
+  background: linear-gradient(#3c1f7c 40%, white 40% 100%);
+}
+.cardsContainer {
+  width: 74%;
+}
+
+@media (max-width: 990px) {
+  .cardsContainer {
+    width: 100%;
+  }
+  .cards {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 3rem;
+  }
+}
