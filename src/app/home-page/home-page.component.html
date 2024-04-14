@@ -4,6 +4,82 @@
   <!-- Carousel section  -->
   <div>
     <h2 class="text-center fw-medium p-3">OUR LATEST</h2>
+    <!-- this is the one works  -->
+    <p-carousel
+      [value]="latest"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [showIndicators]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-video pTemplate="latest">
+        <div
+          class="border-1 surface-border border-round m-2 text-center py-5 px-3 position-relative"
+        >
+          <div class="mb-3 thumbnail-wrapper">
+            <img
+              [src]="video.snippet.thumbnails.maxres.url"
+              class="w-6 shadow-2 h-50 w-75"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn playButtonContainer position-absolute top-50 start-50 translate-middle"
+            (click)="openVideoModal(video.id)"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <img
+              src="../../assets/images/Landpage/02/Layer-46-copy.png"
+              alt="play"
+              class="playButtonImage"
+            />
+          </button>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down"
+      >
+        <div class="modal-content">
+          <div class="modal-header bg-transparent">
+            <!-- we can display a title later  -->
+            <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Title</h1> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="wrapper">
+              <iframe
+                [src]="videoURL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <h2 class="text-center fw-medium p-3">NEWSFEED</h2> -->
   </div>
 </main>
 <app-footer></app-footer>
