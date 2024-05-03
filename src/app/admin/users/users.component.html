@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <aside>
+    <app-dashboard-sidebar></app-dashboard-sidebar>
+  </aside>
+  <div class="main d-flex flex-column">
+    <div class="content m-3">
+      <h2 class="text-start p-3">Manage users</h2>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold">Students</h5>
+                <p class="mb-2 fw-bold">{{ students }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold">Directors</h5>
+                <p class="mb-2 fw-bold">{{ directors }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <table class="table table-striped">
+              <thead>
+                <tr class="highlight">
+                  <th scope="col">ID</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Account Type</th>
+                  <th scope="col">Verified</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Number of Videos</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for ( user of users; track $index) {
+                <tr>
+                  <th scope="row">{{ user.id }}</th>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.type }}</td>
+                  <td>static</td>
+                  <td>0{{ user.phone_number }}</td>
+                  <td>static</td>
+                  <td>
+                    <button class="btn btn-success">Activate</button>
+                  </td>
+                  <!-- <td>
+                    <button class="btn btn-warning">Suspend</button>
+                  </td> -->
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-dashboard-footer></app-dashboard-footer>
+  </div>
+</div>

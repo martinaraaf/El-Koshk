@@ -18,22 +18,27 @@
           class="border-1 surface-border border-round m-2 text-center py-5 px-3 position-relative"
         >
           <div class="mb-3 thumbnail-wrapper">
+            <!-- src="../../assets/images/Landpage/02/Layer-44.png" -->
             <img
-              [src]="video.snippet.thumbnails.maxres.url"
-              class="w-6 shadow-2 h-50 w-75"
+            [src]="video.snippet.thumbnails.maxres.url"
+              class="w-6 shadow-2 h-50 w-75 position-relative"
             />
+            <!-- <img
+              src="../../assets/images/Landpage/02/تعرف-أيه؟.png"
+              class=" w-50 position-absolute bottom-0 start-50 translate-middle-x mb-4"
+            /> -->
           </div>
           <button
             type="button"
             class="btn playButtonContainer position-absolute top-50 start-50 translate-middle"
-            (click)="openVideoModal(video.id)"
+            (click)="openVideoModal(video.id, video.snippet.title)"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >
             <img
               src="../../assets/images/Landpage/02/Layer-46-copy.png"
               alt="play"
-              class="playButtonImage"
+              class="playButtonImage img-fluid"
             />
           </button>
         </div>
@@ -49,14 +54,16 @@
       tabindex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
+      #staticBackdrop
     >
       <div
         class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down"
       >
         <div class="modal-content">
-          <div class="modal-header bg-transparent">
-            <!-- we can display a title later  -->
-            <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Title</h1> -->
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              {{ videoTitle }}
+            </h1>
             <button
               type="button"
               class="btn-close"
@@ -79,7 +86,7 @@
         </div>
       </div>
     </div>
-    <!-- <h2 class="text-center fw-medium p-3">NEWSFEED</h2> -->
+    <h2 class="text-center fw-medium p-3">NEWSFEED</h2>
   </div>
 </main>
 <app-footer></app-footer>

@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <aside>
+    <app-dashboard-sidebar></app-dashboard-sidebar>
+  </aside>
+  <div class="main d-flex flex-column">
+    <div class="content m-3">
+      <h2 class="text-start p-3">Manage Videos</h2>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold">Approved</h5>
+                <p class="mb-2 fw-bold">{{ approvedVideos }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold">Pending</h5>
+                <p class="mb-2 fw-bold">{{ pendingVideos }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <table class="table table-striped">
+              <thead>
+                <tr class="highlight">
+                  <th scope="col">ID</th>
+                  <th scope="col">URL</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Thumbnail</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (video of videos; track $index) {
+                <tr>
+                  <th scope="row">{{ video.id }}</th>
+                  <td>
+                    <a
+                      [href]="
+                        'https://www.youtube.com/watch?v=' + video.video_id
+                      "
+                      target="_blank"
+                      >https://www.youtube.com/{{ video.video_id }}</a
+                    >
+                  </td>
+                  <td>{{ video.title }}</td>
+                  <td><img [src]="video.thumbnail_url" alt="" /></td>
+                  <td>{{ video.user.name }}</td>
+                  <td>{{ video.status }}</td>
+                  <td class="">
+                    <!-- <button class="btn btn-success">Approve</button> -->
+                    <button class="btn btn-danger">Delete</button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-dashboard-footer></app-dashboard-footer>
+  </div>
+</div>

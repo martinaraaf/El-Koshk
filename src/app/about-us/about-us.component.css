@@ -6,6 +6,10 @@ section {
   width: 74%;
 }
 
+/* .imagesContainer {
+  min-height: 210px;
+} */
+
 @media (max-width: 769px) {
   .cardsContainer {
     width: 100%;

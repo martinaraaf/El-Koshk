@@ -1,5 +1,4 @@
 main {
-  min-height: 180vh;
   background: linear-gradient(#fbc751 75%, white 75% 100%);
 }
 /* .playButton {
@@ -21,10 +20,9 @@ main {
   margin: 0 0.5em;
 }
 
-
 .playButtonImage {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
 }
 .wrapper {
   position: relative;
@@ -40,4 +38,18 @@ main {
 }
 .thumbnail-wrapper {
   position: relative;
+}
+
+@media (max-width: 1120px) {
+  .playButtonImage {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .playButtonImage {
+    width: 50px;
+    height: 50px;
+  }
 }

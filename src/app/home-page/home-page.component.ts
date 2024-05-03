@@ -1,4 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { LandingImageComponent } from '../landing-image/landing-image.component';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -7,9 +13,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { LatestVideosService } from '../services/latest-videos.service';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { Latest } from '../interface/latest';
-import { Router } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
@@ -28,22 +32,32 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class HomePageComponent implements OnInit {
   latest!: any[];
-
   responsiveOptions: any[] | undefined;
-  videoURL: any;
   videoId: string | undefined;
+  videoTitle: any;
+  videoURL: any;
 
-  constructor(
-    private _latestService: LatestVideosService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private _latestService: LatestVideosService) {}
+  private sanitizer = inject(DomSanitizer);
 
   @ViewChild('staticBackdrop') modal!: ElementRef;
+  ngAfterViewInit() {
+    // Subscribe to the hidden.bs.modal event when the modal is fully closed
+    this.modal.nativeElement.addEventListener(
+      'hidden.bs.modal',
+      this.onModalClosed.bind(this)
+    );
+  }
+  onModalClosed() {
+    // Function to stop the video playback
+    const iframe = this.modal.nativeElement.querySelector('iframe');
+    iframe.src = '';
+  }
 
   ngOnInit() {
     this._latestService.getLatest().subscribe((res) => {
       this.latest = res;
-      // console.log(res);
+      // console.log(res)
       // console.log(res[0].snippet.thumbnails.maxres.url);
     });
 
@@ -66,18 +80,11 @@ export class HomePageComponent implements OnInit {
     ];
   }
 
-  openVideoModal(videoId: string): void {
+  openVideoModal(videoId: string, videoTitle: string): void {
     this.videoId = videoId;
+    this.videoTitle = videoTitle;
     this.videoURL = this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${videoId}`
     );
   }
-
-  // pauseVideo() {
-  //   const iframe = this.modal.nativeElement.querySelector('iframe');
-  //   const player = new URL(iframe.src).searchParams.get('v');
-
-  //   // Pause the video by removing the src attribute
-  //   iframe.src = '';
-  // }
 }

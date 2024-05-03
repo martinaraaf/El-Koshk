@@ -1,0 +1,33 @@
+/* to make fotter at bottom  */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+app-footer {
+  margin-top: auto;
+}
+/* app-header {
+  position: sticky;
+  top: 0;
+} */
+/* the end  */
+
+@media (max-width: 600px) {
+  .user-info {
+    flex-direction: column;
+    div {
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 998px) {
+  form {
+    width: 100% !important;
+  }
+}
+.video-title{
+  min-height: 48px;
+}

@@ -1,0 +1,46 @@
+<aside id="sidebar" [class.expand]="isSidebarExpanded">
+  <div class="d-flex">
+    <button class="toggle-btn" type="button" (click)="toggleSidebar()">
+      <i class="lni lni-grid-alt"></i>
+    </button>
+    <div class="sidebar-logo">
+      <a routerLink="/admin/dashboard">El-Koshk</a>
+    </div>
+  </div>
+  <ul class="sidebar-nav">
+    <li class="sidebar-item">
+      <a routerLink="/admin/dashboard" class="sidebar-link">
+        <i class="fa-solid fa-chart-line"></i> <span>Dashboard</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a routerLink="/admin/dashboard/users" class="sidebar-link">
+        <i class="lni lni-user"></i>
+        <span>Users</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a routerLink="/admin/dashboard/videos" class="sidebar-link">
+        <i class="lni lni-video"></i> <span>Videos</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="sidebar-link">
+        <i class="lni lni-popup"></i>
+        <span>Notification</span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="sidebar-link">
+        <i class="lni lni-cog"></i>
+        <span>Setting</span>
+      </a>
+    </li>
+  </ul>
+  <div class="sidebar-footer">
+    <a routerLink="/home" class="sidebar-link" (click)="logOut()">
+      <i class="lni lni-exit"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</aside>

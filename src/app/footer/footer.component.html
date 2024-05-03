@@ -61,7 +61,7 @@
 </footer> -->
 
 <!-- new footer  -->
-<footer class="pt-5 mt-5 pb-5 d-flex">
+<footer class="pt-5 pb-5 d-flex">
   <div class="col-lg-5 d-flex justify-content-center firstHalf">
     <div class="d-flex align-items-start">
       <img
@@ -88,6 +88,9 @@
         <li><a routerLink="/portfolios" class="nav-link">PORTFOLIOS</a></li>
         <li><a routerLink="/aboutus" class="nav-link">ABOUT US</a></li>
         <li><a routerLink="/contactus" class="nav-link">CONTACT US</a></li>
+        @if (!isLogged){
+        <li><a routerLink="/login" class="nav-link">LOGIN</a></li>
+        }
       </ul>
     </div>
     <div class="pt-4">

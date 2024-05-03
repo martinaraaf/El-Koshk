@@ -1,6 +1,4 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light pb-0  top-0"
->
+<nav class="navbar navbar-expand-lg navbar-light bg-light pb-0 top-0">
   <div class="container-fluid">
     <div class="ms-5">
       <a class="navbar-brand" routerLink="/home">
@@ -48,11 +46,38 @@
         </div>
         <div class="d-flex">
           <li class="nav-item joinUs d-flex align-items-center">
+            @if(!isLogged){
             <a
               routerLink="/joinus"
               class="btn bg-light rounded-5 border-black px-3 py-1 mx-5"
               >JOIN US</a
             >
+            } @if(isLogged){
+            <div class="dropdown">
+              <button
+                class="btn dropdown-toggle border-light"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{userName}}
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/myportfolio"
+                    >My Portfolio</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item">
+                    <button (click)="logOut()" class="dropdown-item">
+                      Logout
+                    </button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            }
           </li>
         </div>
       </ul>

@@ -1,0 +1,229 @@
+<body>
+  <app-header></app-header>
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div
+            class="card shadow-2-strong card-registration"
+            style="border-radius: 15px"
+          >
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Join Us Now</h3>
+              <!-- register form  -->
+              <form
+                enctype="multipart/form-data"
+                (ngSubmit)="submitRegistration(registerform)"
+                [formGroup]="registerform"
+              >
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="firstName"
+                        >First Name</label
+                      >
+                      <input
+                        type="text"
+                        id="firstName"
+                        class="form-control form-control-lg"
+                        formControlName="first_name"
+                        autocomplete="off"
+                      />
+                      @if ( registerform.get('first_name')?.errors &&
+                      registerform.get('first_name')?.touched) {
+                      <div class="alert text-danger m-0 p-0">
+                        @if (
+                        registerform.get('first_name')?.getError('required') ) {
+                        <p class="m-0">First name is required</p>
+                        } @if( registerform .get('first_name')
+                        ?.getError('minlength') ) {
+                        <p class="m-0">Minimum length is 4</p>
+                        } @if( registerform .get('first_name')
+                        ?.getError('maxlength') ) {
+                        <p class="m-0">Maximum length is 15</p>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="lastName">Last Name</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        class="form-control form-control-lg"
+                        formControlName="last_name"
+                        autocomplete="off"
+                      />
+                      @if ( registerform.get('last_name')?.errors &&
+                      registerform.get('last_name')?.touched) {
+                      <div class="alert text-danger m-0 p-0">
+                        @if (
+                        registerform.get('last_name')?.getError('required') ) {
+                        <p class="m-0">Last name is required</p>
+                        } @if( registerform .get('last_name')
+                        ?.getError('minlength') ) {
+                        <p class="m-0">Minimum length is 4</p>
+                        } @if( registerform .get('last_name')
+                        ?.getError('maxlength') ) {
+                        <p class="m-0">Maximum length is 15</p>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+                    <div data-mdb-input-init class="form-outline w-100">
+                      <label for="userEmail" class="form-label"
+                        >Email address</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control form-control-lg"
+                        id="userEmail"
+                        formControlName="email"
+                        autocomplete="off"
+                      />
+                      @if ( registerform.get('email')?.errors &&
+                      registerform.get('email')?.touched) {
+                      <div class="alert text-danger m-0 p-0">
+                        @if ( registerform.get('email')?.getError('required') )
+                        {
+                        <p class="m-0">Email is required</p>
+                        } @if( registerform .get('email') ?.getError('email') )
+                        {
+                        <p class="m-0">Email is not valid</p>
+                        }
+                      </div>
+                      }
+                      <div
+                        *ngIf="emailAlreadyTaken"
+                        class="alert text-danger m-0 p-0"
+                      >
+                        <p>The email has already been taken.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h6 class="mb-2 pb-1">Type:</h6>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="type"
+                        id="student"
+                        value="student"
+                        formControlName="type"
+                      />
+                      <label class="form-check-label" for="student"
+                        >Student</label
+                      >
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="type"
+                        id="director"
+                        value="director"
+                        formControlName="type"
+                      />
+                      <label class="form-check-label" for="director"
+                        >Director</label
+                      >
+                    </div>
+
+                    @if ( registerform.get('type')?.errors &&
+                    registerform.get('type')?.touched) {
+                    <div class="alert text-danger m-0 p-0">
+                      @if ( registerform.get('type')?.getError('required') ) {
+                      <p class="m-0">Please choose account type</p>
+                      }
+                    </div>
+                    }
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="password">Password</label>
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control form-control-lg"
+                        formControlName="password"
+                      />
+                      @if ( registerform.get('password')?.errors &&
+                      registerform.get('password')?.touched) {
+                      <div class="alert text-danger m-0 p-0">
+                        @if ( registerform.get('password')?.getError('required')
+                        ) {
+                        <p class="m-0">Password is required</p>
+                        } @if( registerform .get('password')
+                        ?.getError('minlength') ) {
+                        <p class="m-0">Minimum length is 8</p>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="phoneNumber"
+                        >Phone Number</label
+                      >
+                      <div class="input-group">
+                        <span class="input-group-text">+20</span>
+                        <!-- Prefix with the country code -->
+                        <input
+                          type="tel"
+                          id="phoneNumber"
+                          class="form-control form-control-lg"
+                          formControlName="phoneNumber"
+                        />
+                      </div>
+                      @if ( registerform.get('phoneNumber')?.errors &&
+                      registerform.get('phoneNumber')?.touched) {
+                      <div class="alert text-danger m-0 p-0">
+                        @if (
+                        registerform.get('phoneNumber')?.getError('required') )
+                        {
+                        <p class="m-0">Phone Number is required</p>
+                        } @if( registerform .get('phoneNumber')
+                        ?.getError('pattern') ) {
+                        <p class="m-0">Invalid phone number</p>
+                        }
+                      </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 pt-2">
+                  <input
+                    data-mdb-button-init
+                    data-mdb-ripple-init
+                    class="btn btn-primary btn-lg"
+                    type="submit"
+                    [disabled]="registerform.invalid"
+                    value="Register"
+                  />
+                </div>
+              </form>
+              <div class="mt-3">
+                Already have an account? <a routerLink="/login">Sign in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</body>
