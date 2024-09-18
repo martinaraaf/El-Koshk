@@ -12,6 +12,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UsersComponent } from './admin/users/users.component';
 import { AllVideosComponent } from './admin/all-videos/all-videos.component';
 import { adminGuard } from './guards/admin.guard';
+import { TestingComponent } from './testing/testing.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,28 +23,62 @@ export const routes: Routes = [
   { path: 'joinus', component: RegisterPageComponent, title: 'EL KOSHK' },
   { path: 'login', component: LoginPageComponent, title: 'EL KOSHK' },
   { path: 'myportfolio', component: UserPortfolioComponent, title: 'EL KOSHK' },
+  { path: 'testing', component: TestingComponent, title: 'EL KOSHK' },
   {
     path: 'admin',
-    component: AdminLoginComponent,
+    // component: AdminLoginComponent,
+    loadComponent: () =>
+      import('./admin/admin-login/admin-login.component').then(
+        (c) => c.AdminLoginComponent
+      ),
     title: 'Admin Login',
   },
+  // {
+  //   path: 'admin/dashboard',
+  //   component: AdminDashboardComponent,
+  //   canActivate: [adminGuard],
+  //   title: 'Admin Dashboard',
+  // },
+  // {
+  //   path: 'admin/dashboard/users',
+  //   component: UsersComponent,
+  //   canActivate: [adminGuard],
+  //   title: 'users',
+  // },
+  // {
+  //   path: 'admin/dashboard/videos',
+  //   component: AllVideosComponent,
+  //   canActivate: [adminGuard],
+  //   title: 'videos',
+  // },
   {
     path: 'admin/dashboard',
-    component: AdminDashboardComponent,
     canActivate: [adminGuard],
     title: 'Admin Dashboard',
-  },
-  {
-    path: 'admin/dashboard/users',
-    component: UsersComponent,
-    canActivate: [adminGuard],
-    title: 'users',
-  },
-  {
-    path: 'admin/dashboard/videos',
-    component: AllVideosComponent,
-    canActivate: [adminGuard],
-    title: 'videos',
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./admin/admin-dashboard/admin-dashboard.component').then(
+            (c) => c.AdminDashboardComponent
+          ),
+        title: 'Admin Dashboard',
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('./admin/users/users.component').then((c) => c.UsersComponent),
+        title: 'users',
+      },
+      {
+        path: 'videos',
+        loadComponent: () =>
+          import('./admin/all-videos/all-videos.component').then(
+            (c) => c.AllVideosComponent
+          ),
+        title: 'videos',
+      },
+    ],
   },
   { path: '**', component: NotFoundComponent, title: '404 Not Found' },
 ];

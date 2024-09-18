@@ -1,4 +1,75 @@
-<body>
-  <app-header></app-header>
-  <app-footer></app-footer>
-</body>
+<app-header></app-header>
+<section
+  class="get-in-touch position-relative d-flex flex-column align-items-center justify-content-start"
+>
+  <img
+    src="../../assets/images/CONTACTS US/large-bg-img.png"
+    alt="contact-us-image"
+    class="lg-image"
+  />
+  <img
+    src="../../assets/images/CONTACTS US/med-bg-img.png"
+    alt=""
+    class="med-image"
+  />
+  <div class="container-fluid my-5">
+    <div class="row text-center">
+      <div class="px-5 me-5 form-container">
+        <h1 class="my-5 pb-5 fw-bolder">GET IN TOUCH</h1>
+        <form [formGroup]="contactForm" (ngSubmit)="onSend($event)">
+          <div class="mb-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              formControlName="name"
+              placeholder="YOUR NAME"
+              autocomplete="name"
+            />
+          </div>
+          <div class="mb-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              formControlName="email"
+              placeholder="YOUR EMAIL"
+              autocomplete="email"
+            />
+          </div>
+          <div class="mb-4">
+            <textarea
+              class="form-control form-control-lg message"
+              formControlName="message"
+              placeholder="YOUR MESSAGE"
+            ></textarea>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-light btn-lg w-25">
+              SEND
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="contacts row justify-content-center align-items-center m-0 pb-5">
+  <div class="col-12 col-lg-6 text-center p-5">
+    <img
+      src="../../assets/images/CONTACTS US/phone.png"
+      alt="phone-icon"
+      class="m-4"
+    />
+    <p class="phone mb-0">PHONE NUMBER</p>
+    <p class="phone-number">[+20] 128 9788 848</p>
+  </div>
+  <div class="col-12 col-lg-6 text-center p-5">
+    <img
+      src="../../assets/images/CONTACTS US/email.png"
+      alt="email-icon"
+      class="m-4"
+    />
+    <p class="email mb-0">E-MAIL</p>
+    <p class="email-address">ELKOSHK.STUDIO&#64;GMAIL.COM</p>
+  </div>
+</div>
+<app-footer></app-footer>

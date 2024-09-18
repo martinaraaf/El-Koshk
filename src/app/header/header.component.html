@@ -1,14 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light pb-0 top-0">
+<section class="navbar navbar-expand-lg navbar-light bg-light p-0">
   <div class="container-fluid">
-    <div class="ms-5">
-      <a class="navbar-brand" routerLink="/home">
-        <img
-          src="../../assets/images/Landpage/01/logo-png.png"
-          class="w-50"
-          alt="El-Koshk Logo"
-        />
-      </a>
-    </div>
+    <a class="navbar-brand" routerLink="/home">
+      <img
+        src="../../assets/images/Landpage/01/logo-png.png"
+        class="logo"
+        alt="El-Koshk Logo"
+      />
+    </a>
 
     <button
       class="navbar-toggler"
@@ -23,54 +21,89 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav flex-grow-1 d-flex justify-content-between">
-        <div class="d-flex links gap-3">
+      <ul class="navbar-nav flex-grow-1 d-flex justify-content-around">
+        <div class="d-flex links justify-content-center flex-grow-1">
           <li
-            class="nav-item home pt-1"
+            class="nav-item home pt-2"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" routerLink="/home">HOME</a>
+            <a class="nav-link text-dark fw-medium" routerLink="/home">HOME</a>
           </li>
-          <li class="nav-item pt-1" [routerLinkActive]="['active']">
-            <a class="nav-link text-dark" routerLink="/portfolios"
+          <li class="nav-item pt-2" [routerLinkActive]="['active']">
+            <a class="nav-link text-dark fw-medium" routerLink="/portfolios"
               >PORTFOLIOS</a
             >
           </li>
-          <li class="nav-item pt-1" [routerLinkActive]="['active']">
-            <a class="nav-link text-dark" routerLink="/aboutus">ABOUT US</a>
+          <li class="nav-item pt-2" [routerLinkActive]="['active']">
+            <a class="nav-link text-dark fw-medium" routerLink="/aboutus"
+              >ABOUT US</a
+            >
           </li>
-          <li class="nav-item pt-1" [routerLinkActive]="['active']">
-            <a class="nav-link text-dark" routerLink="/contactus">CONTACT US</a>
+          <li class="nav-item pt-2" [routerLinkActive]="['active']">
+            <a class="nav-link text-dark fw-medium" routerLink="/contactus"
+              >CONTACT US</a
+            >
           </li>
+          <!-- @if (isLogged) {
+          <li class="nav-item pt-2 extraTabs" [routerLinkActive]="['active']">
+            <a class="nav-link text-dark fw-medium" routerLink="/myportfolio"
+              >My Portfolio</a
+            >
+          </li>
+          <li class="nav-item pt-2 extraTabs">
+            <a class="nav-link text-dark">
+              <button (click)="logOut()" class="dropdown-item fw-medium">
+                Logout
+              </button>
+            </a>
+          </li>
+          to be decided later
+          <li class="nav-item pt-1 extraTabs">
+            <a class="nav-link text-dark">
+              <p>
+                {{ userName }}
+              </p>
+            </a>
+          </li>
+          } -->
         </div>
         <div class="d-flex">
-          <li class="nav-item joinUs d-flex align-items-center">
+          <li
+            class="nav-item joinUs d-flex align-items-center pt-1 pb-1"
+            [routerLinkActive]="['joinus-active']"
+          >
+            <!-- <a
+              *ngIf="!isLogged"
+              routerLink="/joinus"
+              class="nav-link fw-medium text-dark rounded-5 border-black py-1 rounded-5 border mb-1 mt-1"
+              >JOIN US</a
+            > -->
             @if(!isLogged){
             <a
               routerLink="/joinus"
-              class="btn bg-light rounded-5 border-black px-3 py-1 mx-5"
+              class="nav-link fw-medium text-dark rounded-5 border-black py-1 rounded-5 border mb-1 mt-1"
               >JOIN US</a
             >
             } @if(isLogged){
-            <div class="dropdown">
+            <div class="dropdown-center">
               <button
-                class="btn dropdown-toggle border-light"
+                class="btn dropdown-toggle border-light fw-medium"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {{userName}}
+                {{ userName }}
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu  mt-2">
                 <li>
-                  <a class="dropdown-item" routerLink="/myportfolio"
+                  <a class="dropdown-item fw-medium" routerLink="/myportfolio"
                     >My Portfolio</a
                   >
                 </li>
                 <li>
                   <a class="dropdown-item">
-                    <button (click)="logOut()" class="dropdown-item">
+                    <button (click)="logOut()" class="dropdown-item fw-medium">
                       Logout
                     </button>
                   </a>
@@ -83,4 +116,4 @@
       </ul>
     </div>
   </div>
-</nav>
+</section>

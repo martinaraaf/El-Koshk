@@ -38,9 +38,24 @@
     </li>
   </ul>
   <div class="sidebar-footer">
-    <a routerLink="/home" class="sidebar-link" (click)="logOut()">
-      <i class="lni lni-exit"></i>
-      <span>Logout</span>
-    </a>
+    <ul class="sidebar-nav p-0">
+      @if (adminEmail) {
+      <li class="sidebar-item">
+        <a class="sidebar-link">
+          <i class="fa-solid fa-at"></i> <span>{{ adminEmail }}</span>
+        </a>
+      </li>
+      }
+      <li class="sidebar-item">
+        <a
+          class="sidebar-link logout"
+          (click)="logOut()"
+          style="cursor: pointer"
+        >
+          <i class="lni lni-exit"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </aside>

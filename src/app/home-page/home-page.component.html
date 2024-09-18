@@ -1,92 +1,172 @@
 <app-header></app-header>
 <main>
-  <app-landing-image></app-landing-image>
-  <!-- Carousel section  -->
-  <div>
-    <h2 class="text-center fw-medium p-3">OUR LATEST</h2>
-    <!-- this is the one works  -->
-    <p-carousel
-      [value]="latest"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      [showIndicators]="false"
-      [responsiveOptions]="responsiveOptions"
-    >
-      <ng-template let-video pTemplate="latest">
-        <div
-          class="border-1 surface-border border-round m-2 text-center py-5 px-3 position-relative"
-        >
-          <div class="mb-3 thumbnail-wrapper">
-            <!-- src="../../assets/images/Landpage/02/Layer-44.png" -->
-            <img
-            [src]="video.snippet.thumbnails.maxres.url"
-              class="w-6 shadow-2 h-50 w-75 position-relative"
-            />
-            <!-- <img
-              src="../../assets/images/Landpage/02/تعرف-أيه؟.png"
-              class=" w-50 position-absolute bottom-0 start-50 translate-middle-x mb-4"
-            /> -->
-          </div>
-          <button
-            type="button"
-            class="btn playButtonContainer position-absolute top-50 start-50 translate-middle"
-            (click)="openVideoModal(video.id, video.snippet.title)"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
-            <img
-              src="../../assets/images/Landpage/02/Layer-46-copy.png"
-              alt="play"
-              class="playButtonImage img-fluid"
-            />
-          </button>
-        </div>
-      </ng-template>
-    </p-carousel>
+  <div class="hero-section">
+    <img
+      src="../../assets/images/Landpage/hero-image.png"
+      alt="hero image"
+      width="100%"
+    />
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-      #staticBackdrop
-    >
-      <div
-        class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down"
+    <!-- Carousel section  -->
+    <div class="section-two">
+      <h2 class="text-center fw-medium p-3">OUR LATEST</h2>
+      <p-carousel
+        [value]="latest"
+        [numVisible]="3"
+        [numScroll]="3"
+        [circular]="true"
+        [showIndicators]="false"
+        [responsiveOptions]="responsiveOptions"
       >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-              {{ videoTitle }}
-            </h1>
+        <ng-template let-video pTemplate="item">
+          <div
+            class="border-1 surface-border border-round m-2 text-center px-3 position-relative"
+          >
+            <div class="mb-3 position-relative">
+              <!-- [src]="video.snippet.thumbnails.maxres.url" -->
+              <img
+                src="../../assets/images/Landpage/02/Layer-44.png"
+                class="w-6 shadow-2 h-50 w-75 position-relative"
+              />
+              <img
+                src="../../assets/images/Landpage/02/تعرف-أيه؟.png"
+                class="w-50 position-absolute bottom-0 start-50 translate-middle-x mb-4"
+              />
+            </div>
             <button
               type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              class="btn playButtonContainer position-absolute top-50 start-50 translate-middle"
+              (click)="openVideoModal(video.id, video.snippet.title)"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              <img
+                src="../../assets/images/Landpage/02/Layer-46-copy.png"
+                alt="play"
+                class="playButtonImage img-fluid"
+              />
+            </button>
           </div>
-          <div class="modal-body">
-            <div class="wrapper">
-              <iframe
-                [src]="videoURL"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+    #staticBackdrop
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            {{ videoTitle }}
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="wrapper">
+            <iframe
+              [src]="videoURL"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- news feed section  -->
+  <div class="news-section mt-5">
     <h2 class="text-center fw-medium p-3">NEWSFEED</h2>
+    <div class="news-one d-flex">
+      <div class="news-one-left p-0">
+        <img
+          src="../../assets/images/Landpage/03/short-film-winter-camp.png"
+          alt="short-film-workshop"
+          width="100%"
+        />
+      </div>
+      <div class="news-one-right text-light d-flex align-items-end flex-grow-1">
+        <div class="p-4 mb-5 flex-grow-1">
+          <p>SHORT FILM WORKSHOP</p>
+          <p>
+            YOU WILL LEARN THE FUNDAMENTALS OF FILMMAKING <br />
+            AND HOW TO TURN YOUR IDEA INTO A REAL SHORT FILM
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="news-two d-flex">
+      <div
+        class="news-two-left pb-5 px-4 d-flex flex-column justify-content-end"
+      >
+        <div class="d-flex mb-2">
+          <span>
+            EL-KOSHK <br />
+            AT EL GOUNA <br />
+            FILM FESTIVAL
+          </span>
+          <img
+            src="../../assets/images/Landpage/03/Layer-52.png"
+            alt="El-Gouna-festival-logo"
+            class="img-fluid elgouna-logo"
+          />
+        </div>
+        <p>
+          IN LIGHT OF THE ACTIVITIES OF EL GOUNA FILM FESTIVAL TO SUPPORT THE
+          FILM INDUSTRY IN EGYPT, OUR TEAM PARTICIPATED WITH TWELVE OTHER
+          STARTUPS BY PRESENTING OUR IDEAS THROUGH CINEMATEH PROGRAM BY GEMINI
+          AFRICA.
+        </p>
+      </div>
+      <div class="news-two-right">
+        <img
+          src="../../assets/images/Landpage/03/El-Koshk--At-El-Gouna.png"
+          alt="El-Koshk-At-El-Gouna"
+          width="100%"
+        />
+      </div>
+    </div>
+    <div class="news-three d-flex">
+      <div class="news-three-left p-0">
+        <img
+          src="../../assets/images/Landpage/03/card-game.png"
+          alt="card-game"
+          width="100%"
+        />
+      </div>
+      <div
+        class="news-three-right text-light d-flex align-items-end flex-grow-1"
+      >
+        <div class="p-4 mb-4 flex-grow-1">
+          <p class="mb-1">CARD GAME (تعرف؟ تكسب)</p>
+          <p>
+            GENERAL AND SPECIAL QUESTIONS IN ELKOSHK VIDEOS.<br />
+            A COMPETITIVE GAME BETWEEN 4 PEOPLE THAT ACHIEVES EDUCATION AND
+            ENJOYMENT TOGETHER.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 <app-footer></app-footer>

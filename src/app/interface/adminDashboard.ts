@@ -1,3 +1,15 @@
+export interface LoginAdmin {
+  token: string;
+  user: {
+    email: string;
+  };
+}
+
+export interface UsersCounts {
+  count: number;
+  'students count': number;
+  'directors count': number;
+}
 export interface VideoCounts {
   'All Videos': number;
   'Pending Count': number;
@@ -10,7 +22,7 @@ export interface User {
   name: string;
   email: string;
   type: string;
-  phone_number: number;
+  phone_number: number; 
 }
 
 export interface Video {
@@ -23,6 +35,10 @@ export interface Video {
   user: User; // Nested User object
 }
 
-export interface VideosResponse {
+export interface VideosData {
   results: Video[]; // Array of Video objects
+}
+
+export interface StatusChangeResponse {
+  message: string;
 }

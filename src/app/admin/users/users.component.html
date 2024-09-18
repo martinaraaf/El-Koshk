@@ -48,7 +48,7 @@
                   <td>0{{ user.phone_number }}</td>
                   <td>static</td>
                   <td>
-                    <button class="btn btn-success">Activate</button>
+                    <button class="btn btn-success" (click)="activateUserAcc(user.id)">Activate</button>
                   </td>
                   <!-- <td>
                     <button class="btn btn-warning">Suspend</button>

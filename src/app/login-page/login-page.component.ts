@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import {
@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthUserService } from '../services/auth-user.service';
+import { UserLoginResponse, loginFormData } from '../interface/user';
 
 @Component({
   selector: 'app-login-page',
@@ -24,18 +25,27 @@ import { AuthUserService } from '../services/auth-user.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
-export class LoginPageComponent {
-  error: string = '';
+export class LoginPageComponent implements OnInit {
+  isLoading: boolean = false;
+  loginForm!: FormGroup;
   isLogged: boolean = false;
-
   invalidCredentials: boolean = false;
 
-  constructor(private _Router: Router, private _AuthUser: AuthUserService) {}
+  constructor(private router: Router, private authUser: AuthUserService) {}
 
   ngOnInit(): void {
-    this._AuthUser.userToken.subscribe({
+    this.loginForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.required,
+      ]),
+    });
+
+    // will be handled later
+    this.authUser.userToken.subscribe({
       next: () => {
-        if (this._AuthUser.userToken.getValue() != null) {
+        if (this.authUser.userToken.getValue() != null) {
           this.isLogged = true;
         } else {
           this.isLogged = false;
@@ -44,45 +54,32 @@ export class LoginPageComponent {
     });
   }
 
-  loginform: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
-  });
+  onLogin() {
+    this.isLoading = true;
 
-  submitLogin(loginform: FormGroup) {
-    const formdata = new FormData();
+    const formdata: loginFormData = {
+      email: this.loginForm.controls['email'].value,
+      password: this.loginForm.controls['password'].value,
+    };
+
     this.invalidCredentials = false;
 
-    const email = this.loginform.get('email')?.value;
-    const password = this.loginform.get('password')?.value;
-
-    formdata.append('email', this.loginform.get('email')?.value);
-    formdata.append('password', this.loginform.get('password')?.value);
-
-    this._AuthUser.loginUser(formdata).subscribe({
-      next: (res) => {
-        // console.log('user logged in');
-        // console.log(res);
-
-        // store token in local storage
+    this.authUser.loginUser(formdata).subscribe({
+      next: (res: UserLoginResponse) => {
+        this.isLoading = false;
         localStorage.setItem('userToken', res.token);
-        this._AuthUser.saveUserData();
+        this.authUser.saveUserData();
 
-        // navigate to home or profile
-        this._Router.navigate(['/myportfolio']);
+        this.router.navigate(['/myportfolio']);
 
-        this.loginform.reset();
+        // this.loginForm.reset();
       },
       error: (err) => {
-        console.log(err);
+        this.isLoading = false;
         if (err.error.error === 'Invalid credentials') {
           this.invalidCredentials = true;
         }
       },
-      complete: () => {},
     });
   }
 }

@@ -1,28 +1,23 @@
 main {
-  background: linear-gradient(#fbc751 75%, white 75% 100%);
+  margin-bottom: 130px;
 }
-/* .playButton {
-  position: absolute;
-  top: 28%;
-  left: 41%;
-  z-index: 1;
-} */
-/* .playButtonImage {
-  width: 5vw;
-} */
-
-.cards-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
+.hero-section {
+  min-height: 50vh;
+  background: linear-gradient(var(--main-color) 81%, white 81% 100%);
 }
-.card {
-  margin: 0 0.5em;
-}
-
 .playButtonImage {
   width: 100px;
   height: 100px;
+}
+.section-two {
+  min-height: 50vh;
+  margin-top: -100px;
+}
+.section-two h2,
+.news-section h2 {
+  font-family: "Rock", sans-serif;
+  letter-spacing: 2px;
+  font-size: 35px;
 }
 .wrapper {
   position: relative;
@@ -36,20 +31,148 @@ main {
   width: 100%;
   height: 100%;
 }
-.thumbnail-wrapper {
-  position: relative;
+.news-one-left {
+  width: 53%;
 }
-
+.news-one-right {
+  background-color: #1a1a1a;
+}
+.news-one-right p:first-child {
+  font-family: "Gotham-Black-Bold", sans-serif;
+  font-size: 2.5vw;
+}
+.news-one-right p:last-child {
+  font-family: Helvetica, sans-serif;
+  font-size: 1.2vw;
+  word-spacing: 5px;
+  line-height: 1.2;
+}
+.news-two-right {
+  width: 52%;
+}
+.news-two-left {
+  width: 48%;
+  background-color: var(--main-color);
+}
+.news-two-left div {
+  width: 80%;
+}
+.news-two-left p {
+  width: 80%;
+  font-family: Helvetica, sans-serif;
+  font-size: 1vw;
+  font-weight: 500;
+}
+.news-two-left div span {
+  font-family: "Gotham-Black-Bold", sans-serif;
+  font-size: 2.4vw;
+  line-height: 0.9;
+  margin-bottom: -10px;
+  padding-top: 20px;
+  margin-right: 5px;
+}
+.news-three-left {
+  width: 57%;
+}
+.news-three-right {
+  width: 43%;
+  background-color: #6c02ba;
+}
+.news-three-right div p:first-child {
+  font-family: "Gotham-Black-Bold", sans-serif;
+  font-size: 2.5vw;
+}
+.news-three-right div p:last-child {
+  font-family: Helvetica, sans-serif;
+  font-size: 1.2vw;
+  word-spacing: 3px;
+  line-height: 1.4;
+}
+@media (min-width: 992px) {
+  .elgouna-logo {
+    height: 100px;
+  }
+}
+@media (min-width: 1200px) {
+  .elgouna-logo {
+    height: 100%;
+  }
+}
 @media (max-width: 1120px) {
   .playButtonImage {
     width: 80px;
     height: 80px;
   }
 }
+@media (max-width: 992px) {
+  .news-one,
+  .news-three {
+    flex-direction: column;
+  }
+  .news-two {
+    flex-direction: column-reverse;
+  }
+  .news-one-left,
+  .news-two-right,
+  .news-two-left,
+  .news-three-right,
+  .news-three-left,
+  .news-two-left div,
+  .news-two-left p {
+    width: 100%;
+  }
+  .news-one-right p:first-child,
+  .news-two-left div span,
+  .news-three-right div p:first-child {
+    font-size: 1.8rem;
+  }
+  .news-one-right p:last-child,
+  .news-two-left p,
+  .news-three-right div p:last-child {
+    font-size: 1rem;
+  }
+  .news-one-right div,
+  .news-three-right div {
+    margin-bottom: 0px !important;
+  }
 
+  .news-two-left {
+    padding-top: 24px;
+  }
+  .news-two-left div {
+    align-items: start;
+  }
+  .elgouna-logo {
+    height: 100px;
+  }
+}
 @media (max-width: 768px) {
   .playButtonImage {
     width: 50px;
     height: 50px;
+  }
+  .section-two {
+    margin-top: 0;
+  }
+  .section-two h2,
+  .news-section h2 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .news-one-right p:first-child,
+  .news-three-right div p:first-child {
+    font-size: 1.3rem;
+  }
+  .news-two-left div span {
+    font-size: 1rem;
+  }
+  .news-one-right p:last-child,
+  .news-two-left p,
+  .news-three-right div p:last-child {
+    font-size: 0.7rem;
+  }
+  .elgouna-logo {
+    height: 70px;
   }
 }

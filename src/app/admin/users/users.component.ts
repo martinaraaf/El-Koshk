@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { DashboardSidebarComponent } from '../dashboard-sidebar/dashboard-sidebar.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DashboardFooterComponent } from '../dashboard-footer/dashboard-footer.component';
 import { AdminDashboardService } from '../../services/admin-dashboard.service';
-import { User } from '../../interface/adminDashboard';
+import { User, UsersCounts } from '../../interface/adminDashboard';
 
 @Component({
   selector: 'app-users',
@@ -13,26 +13,42 @@ import { User } from '../../interface/adminDashboard';
   styleUrl: './users.component.css',
 })
 export class UsersComponent {
-  students: any;
-  directors: any;
+  students: number = 0;
+  directors: number = 0;
   users: User[] = [];
 
-  constructor(private _AdminService: AdminDashboardService) {
+  constructor(
+    private _AdminService: AdminDashboardService,
+    private _Router: Router
+  ) {
     const adminToken = sessionStorage.getItem('adminToken');
+    if (adminToken !== null) {
+      this.fetchUsersCount(adminToken);
+      this.fetchUserssData();
+    }
+    if (!adminToken) {
+      this._Router.navigate(['/admin']);
+    }
+  }
 
+  private fetchUsersCount(adminToken: string): void {
     this._AdminService.getUsersCount(adminToken).subscribe({
-      next: (res) => {
-        this.students = res['students count'];
-        this.directors = res['directors count'];
+      next: (res: UsersCounts) => {
+        const { 'students count': students, 'directors count': directors } =
+          res;
+        this.students = students;
+        this.directors = directors;
       },
       error: (err) => {
         console.error('Error fetching data', err);
       },
       complete: () => {},
     });
+  }
 
+  private fetchUserssData(): void {
     this._AdminService.getUsersData().subscribe({
-      next: (data) => {
+      next: (data: User[]) => {
         this.users = data;
       },
       error: (err) => {
@@ -41,4 +57,8 @@ export class UsersComponent {
       complete: () => {},
     });
   }
+
+  activateUserAcc(userId: number) {}
+
+  suspendUserAcc(userId: number) {}
 }

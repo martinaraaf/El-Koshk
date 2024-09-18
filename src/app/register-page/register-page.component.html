@@ -1,229 +1,361 @@
-<body>
-  <app-header></app-header>
-  <section class="vh-100">
-    <div class="container py-5 h-100">
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
-          <div
-            class="card shadow-2-strong card-registration"
-            style="border-radius: 15px"
-          >
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Join Us Now</h3>
-              <!-- register form  -->
-              <form
-                enctype="multipart/form-data"
-                (ngSubmit)="submitRegistration(registerform)"
-                [formGroup]="registerform"
-              >
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="firstName"
-                        >First Name</label
-                      >
-                      <input
-                        type="text"
-                        id="firstName"
-                        class="form-control form-control-lg"
-                        formControlName="first_name"
-                        autocomplete="off"
-                      />
-                      @if ( registerform.get('first_name')?.errors &&
-                      registerform.get('first_name')?.touched) {
-                      <div class="alert text-danger m-0 p-0">
-                        @if (
-                        registerform.get('first_name')?.getError('required') ) {
-                        <p class="m-0">First name is required</p>
-                        } @if( registerform .get('first_name')
-                        ?.getError('minlength') ) {
-                        <p class="m-0">Minimum length is 4</p>
-                        } @if( registerform .get('first_name')
-                        ?.getError('maxlength') ) {
-                        <p class="m-0">Maximum length is 15</p>
-                        }
-                      </div>
-                      }
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="lastName">Last Name</label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        class="form-control form-control-lg"
-                        formControlName="last_name"
-                        autocomplete="off"
-                      />
-                      @if ( registerform.get('last_name')?.errors &&
-                      registerform.get('last_name')?.touched) {
-                      <div class="alert text-danger m-0 p-0">
-                        @if (
-                        registerform.get('last_name')?.getError('required') ) {
-                        <p class="m-0">Last name is required</p>
-                        } @if( registerform .get('last_name')
-                        ?.getError('minlength') ) {
-                        <p class="m-0">Minimum length is 4</p>
-                        } @if( registerform .get('last_name')
-                        ?.getError('maxlength') ) {
-                        <p class="m-0">Maximum length is 15</p>
-                        }
-                      </div>
-                      }
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-4 d-flex align-items-center">
-                    <div data-mdb-input-init class="form-outline w-100">
-                      <label for="userEmail" class="form-label"
-                        >Email address</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control form-control-lg"
-                        id="userEmail"
-                        formControlName="email"
-                        autocomplete="off"
-                      />
-                      @if ( registerform.get('email')?.errors &&
-                      registerform.get('email')?.touched) {
-                      <div class="alert text-danger m-0 p-0">
-                        @if ( registerform.get('email')?.getError('required') )
-                        {
-                        <p class="m-0">Email is required</p>
-                        } @if( registerform .get('email') ?.getError('email') )
-                        {
-                        <p class="m-0">Email is not valid</p>
-                        }
-                      </div>
-                      }
-                      <div
-                        *ngIf="emailAlreadyTaken"
-                        class="alert text-danger m-0 p-0"
-                      >
-                        <p>The email has already been taken.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <h6 class="mb-2 pb-1">Type:</h6>
-
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="type"
-                        id="student"
-                        value="student"
-                        formControlName="type"
-                      />
-                      <label class="form-check-label" for="student"
-                        >Student</label
-                      >
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="type"
-                        id="director"
-                        value="director"
-                        formControlName="type"
-                      />
-                      <label class="form-check-label" for="director"
-                        >Director</label
-                      >
-                    </div>
-
-                    @if ( registerform.get('type')?.errors &&
-                    registerform.get('type')?.touched) {
-                    <div class="alert text-danger m-0 p-0">
-                      @if ( registerform.get('type')?.getError('required') ) {
-                      <p class="m-0">Please choose account type</p>
-                      }
-                    </div>
+<app-header></app-header>
+<section
+  class="position-relative d-flex flex-column align-items-center justify-content-start"
+>
+  <img
+    src="../../assets/images/Join Us/01/box-man-layer.png"
+    alt="box"
+    class="box-man-layer d-none d-lg-block"
+  />
+  <img
+    src="../../assets/images/Join Us/01/Layer-54-2.png"
+    alt="image-layer"
+    class="bottom-image-layer"
+  />
+  <div class="container-fluid my-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12">
+        <h1 class="text-start">JOIN US</h1>
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="onRegister()"
+        >
+          <div class="inputs-container">
+            <div class="left-half">
+              <div class="mb-4 row">
+                <!-- name  -->
+                <div class="col-8">
+                  <label for="name" class="form-label ps-2">NAME</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control form-control-lg"
+                    formControlName="name"
+                  />
+                  @if ( !registerForm.controls['name'].valid &&
+                  registerForm.controls['name'].touched) {
+                  <div class="alert text-danger m-0 p-0">
+                    @if ( registerForm.controls['name'].errors?.['required']) {
+                    <small class="m-0">Field is required</small>
                     }
                   </div>
+                  }
                 </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-4 pb-2">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="password">Password</label>
-                      <input
-                        type="password"
-                        id="password"
-                        class="form-control form-control-lg"
-                        formControlName="password"
-                      />
-                      @if ( registerform.get('password')?.errors &&
-                      registerform.get('password')?.touched) {
-                      <div class="alert text-danger m-0 p-0">
-                        @if ( registerform.get('password')?.getError('required')
-                        ) {
-                        <p class="m-0">Password is required</p>
-                        } @if( registerform .get('password')
-                        ?.getError('minlength') ) {
-                        <p class="m-0">Minimum length is 8</p>
-                        }
-                      </div>
-                      }
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4 pb-2">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="phoneNumber"
-                        >Phone Number</label
-                      >
-                      <div class="input-group">
-                        <span class="input-group-text">+20</span>
-                        <!-- Prefix with the country code -->
-                        <input
-                          type="tel"
-                          id="phoneNumber"
-                          class="form-control form-control-lg"
-                          formControlName="phoneNumber"
-                        />
-                      </div>
-                      @if ( registerform.get('phoneNumber')?.errors &&
-                      registerform.get('phoneNumber')?.touched) {
-                      <div class="alert text-danger m-0 p-0">
-                        @if (
-                        registerform.get('phoneNumber')?.getError('required') )
-                        {
-                        <p class="m-0">Phone Number is required</p>
-                        } @if( registerform .get('phoneNumber')
-                        ?.getError('pattern') ) {
-                        <p class="m-0">Invalid phone number</p>
-                        }
-                      </div>
-                      }
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-4 pt-2">
+                <!-- age  -->
+                <div class="col-4">
+                  <label for="age" class="form-label ps-2">AGE</label>
                   <input
-                    data-mdb-button-init
-                    data-mdb-ripple-init
-                    class="btn btn-primary btn-lg"
-                    type="submit"
-                    [disabled]="registerform.invalid"
-                    value="Register"
+                    type="text"
+                    id="age"
+                    class="form-control form-control-lg"
+                    formControlName="age"
                   />
+                  @if ( !registerForm.controls['age'].valid &&
+                  registerForm.controls['age'].touched) {
+                  <div class="alert text-danger m-0 p-0">
+                    @if ( registerForm.controls['age'].errors?.['required']) {
+                    <small class="m-0">Field is required</small>
+                    } @if (registerForm.controls['age'].errors?.['pattern']) {
+                    <small class="m-0"> Age must be between 8 and 18. </small>
+                    }
+                  </div>
+                  }
                 </div>
-              </form>
-              <div class="mt-3">
-                Already have an account? <a routerLink="/login">Sign in</a>
+              </div>
+              <!-- email  -->
+              <div class="mb-4">
+                <label for="email" class="form-label ps-2">E-MAIL</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control form-control-lg"
+                  formControlName="email"
+                />
+                @if ( !registerForm.controls['email'].valid &&
+                registerForm.controls['email'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if ( registerForm.controls['email'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  } @if (registerForm.controls['email'].errors?.['email']) {
+                  <small class="m-0"> Invalid input </small>
+                  }
+                </div>
+                }
+              </div>
+              <!-- password  -->
+              <div class="mb-4 row">
+                <div class="col-6">
+                  <label for="password" class="form-label ps-2"
+                    >SET A PASSWORD</label
+                  >
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control form-control-lg"
+                    formControlName="password"
+                  />
+                  @if ( !registerForm.controls['password'].valid &&
+                  registerForm.controls['password'].touched) {
+                  <div class="alert text-danger m-0 p-0">
+                    @if (
+                    registerForm.controls['password'].errors?.['required']) {
+                    <small class="m-0">Field is required</small>
+                    } @if
+                    (registerForm.controls['password'].errors?.['minlength']) {
+                    <small class="m-0"> must be at least 8 characters</small>
+                    }
+                  </div>
+                  }
+                </div>
+                <!-- confirm password  -->
+                <div class="col-6">
+                  <label for="confirmPassword" class="form-label ps-2"
+                    >CONFIRM PASSWORD</label
+                  >
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="form-control form-control-lg"
+                    formControlName="confirmPassword"
+                  />
+                  <!-- required error for confirm password  -->
+                  <!-- @if ( !registerForm.controls['confirmPassword'].valid &&
+                  registerForm.controls['confirmPassword'].touched &&
+                  registerForm.controls['confirmPassword'].errors?.['required'])
+                  {
+                  <small class="m-0 text-danger">Field is required</small>
+                  } -->
+                  @if (registerForm.errors?.['passwordMismatch'] &&
+                  registerForm.controls['password'].touched ) {
+                  <small class="m-0 text-danger">Passwords do not match </small>
+                  }
+                </div>
+              </div>
+              <!-- phone number  -->
+              <div class="mb-4">
+                <label for="mobileNumber" class="form-label ps-2"
+                  >MOBILE NUMBER</label
+                >
+                <input
+                  type="tel"
+                  id="mobileNumber"
+                  class="form-control form-control-lg"
+                  formControlName="mobileNumber"
+                />
+                @if ( !registerForm.controls['mobileNumber'].valid &&
+                registerForm.controls['mobileNumber'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if (
+                  registerForm.controls['mobileNumber'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  } @if
+                  (registerForm.controls['mobileNumber'].errors?.['pattern']) {
+                  <small class="m-0">Invalid number</small>
+                  }
+                </div>
+                }
+              </div>
+              <!-- parent number  -->
+              <div class="mb-4">
+                <label for="parentNumber" class="form-label ps-2"
+                  >PARENT NUMBER</label
+                >
+                <input
+                  type="tel"
+                  id="parentNumber"
+                  class="form-control form-control-lg"
+                  formControlName="parentNumber"
+                />
+                @if ( !registerForm.controls['parentNumber'].valid &&
+                registerForm.controls['parentNumber'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if (
+                  registerForm.controls['parentNumber'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  } @if
+                  (registerForm.controls['parentNumber'].errors?.['pattern']) {
+                  <small class="m-0">Invalid number</small>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            <div class="right-half">
+              <!-- address  -->
+              <div class="mb-4">
+                <label for="address" class="form-label ps-2">ADDRESS</label>
+                <input
+                  type="text"
+                  id="address"
+                  class="form-control form-control-lg"
+                  formControlName="address"
+                />
+                @if ( !registerForm.controls['address'].valid &&
+                registerForm.controls['address'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if ( registerForm.controls['address'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  }
+                </div>
+                }
+              </div>
+              <!-- talent  -->
+              <div class="mb-4">
+                <label for="talent" class="form-label ps-2"
+                  >WHAT IS YOUR TALENT ?</label
+                >
+                <input
+                  type="text"
+                  id="talent"
+                  class="form-control form-control-lg"
+                  formControlName="talent"
+                />
+                @if ( !registerForm.controls['talent'].valid &&
+                registerForm.controls['talent'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if ( registerForm.controls['talent'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  }
+                </div>
+                }
+              </div>
+              <!-- reach method  -->
+              <div class="mb-4">
+                <label for="reach-method" class="form-label ps-2"
+                  >HOW DID YOU REACH US?</label
+                >
+                <input
+                  type="text"
+                  id="reach-method"
+                  class="form-control form-control-lg"
+                  formControlName="reachMethod"
+                />
+                @if ( !registerForm.controls['reachMethod'].valid &&
+                registerForm.controls['reachMethod'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if (
+                  registerForm.controls['reachMethod'].errors?.['required']) {
+                  <small class="m-0">Field is required</small>
+                  }
+                </div>
+                }
+                <!-- if he wants to have options  -->
+                <!-- <select
+                  name="reach-method"
+                  id="reach-method"
+                  formControlName="reachMethod"
+                  class="form-select form-select-lg"
+                  (change)="onchange()"
+                >
+                  <option value="">select one</option>
+                  @for (reachMethod of reachMethods; track $index) {
+                  <option [ngValue]="reachMethod">{{ reachMethod }}</option>
+                  }
+                </select> -->
+              </div>
+              <!-- artistic experience  -->
+              <div class="mb-4">
+                <label for="artisticExperience" class="form-label ps-2"
+                  >HAVE YOU DONE ANY ARTISTIC WORK BEFORE?</label
+                >
+                <input
+                  type="text"
+                  id="artisticExperience"
+                  class="form-control form-control-lg"
+                  formControlName="artisticExperience"
+                />
+                @if ( !registerForm.controls['artisticExperience'].valid &&
+                registerForm.controls['artisticExperience'].touched) {
+                <div class="alert text-danger m-0 p-0">
+                  @if (
+                  registerForm.controls['artisticExperience'].errors?.['required'])
+                  {
+                  <small class="m-0">Field is required</small>
+                  }
+                </div>
+                }
+                <!-- if he wants select options of yes and no  -->
+                <!-- <select
+                  name="artisticExperience"
+                  id="artisticExperience"
+                  formControlName="artisticExperience"
+                  class="form-select form-select-lg"
+                >
+                  <option value=""></option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select> -->
+              </div>
+              <!-- perv work link  -->
+              <div class="mb-4">
+                <label for="prevWorkLink" class="form-label ps-2"
+                  >PUT A LINK FOR ANY PREVIOUS VIDEOS FOR YOU</label
+                >
+                <input
+                  type="text"
+                  id="prevWorkLink"
+                  class="form-control form-control-lg"
+                  formControlName="prevWorkLink"
+                />
+                @if ( registerForm.controls['prevWorkLink'].touched &&
+                registerForm.controls['prevWorkLink'].value) {
+                <div class="alert text-danger m-0 p-0">
+                  @if (
+                  registerForm.controls['prevWorkLink'].errors?.['pattern']) {
+                  <small class="m-0">Invalid link</small>
+                  }
+                </div>
+                }
+              </div>
+              <div
+                class="mb-4 d-flex justify-content-center align-items-center"
+              >
+                <!-- <input
+                  type="file"
+                  id="photo"
+                  class="form-control form-control-lg"
+                  formControlName="photo"
+                /> -->
+                <label for="photo" class="btn bg-light upload-button">
+                  UPLOAD A PHOTO OF YOU
+                  <input
+                    type="file"
+                    id="photo"
+                    style="display: none"
+                    accept="image/*"
+                    formControlName="photo"
+                    (change)="onFileChange($event)"
+                  />
+                  <!-- not showing error -->
+                  <!-- @if ( registerForm.controls['photo'].dirty &&
+                  registerForm.controls['photo'].errors) {
+                  <div class="alert text-danger m-0 p-0">
+                    <small class="m-0">Field is required</small>
+                  </div>
+                  } -->
+                </label>
               </div>
             </div>
           </div>
-        </div>
+          <div class="pt-2 signup-container row">
+            <button
+              class="btn btn-primary btn-lg"
+              type="submit"
+              [disabled]="!registerForm.valid"
+            >
+              @if (!isLoading) {
+              <span>SIGN UP</span>
+              } @if (isLoading) {
+              <i class="fas fa-spinner fa-spin"></i>
+              }
+            </button>
+            <span class="text-light"
+              >Have an account? <a routerLink="/login">Login</a></span
+            >
+          </div>
+        </form>
       </div>
     </div>
-  </section>
-  <app-footer></app-footer>
-</body>
+  </div>
+</section>
+<app-footer></app-footer>

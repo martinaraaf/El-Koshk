@@ -1,28 +1,27 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  inject,
-} from '@angular/core';
-import { LandingImageComponent } from '../landing-image/landing-image.component';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
-import { HomeLatestCardComponent } from '../home-latest-card/home-latest-card.component';
-import { CarouselModule } from 'primeng/carousel';
 import { LatestVideosService } from '../services/latest-videos.service';
-import { ButtonModule } from 'primeng/button';
-import { CommonModule } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
+import { LatestVideos } from '../interface/latestVideos.model';
+
+// interface for responsive options for the carousel
+interface ResponsiveOption {
+  breakpoint: string;
+  numVisible: number;
+  numScroll: number;
+}
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    LandingImageComponent,
     HeaderComponent,
     FooterComponent,
-    HomeLatestCardComponent,
     CarouselModule,
     ButtonModule,
     CommonModule,
@@ -31,34 +30,26 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent implements OnInit {
-  latest!: any[];
-  responsiveOptions: any[] | undefined;
-  videoId: string | undefined;
-  videoTitle: any;
-  videoURL: any;
-
-  constructor(private _latestService: LatestVideosService) {}
-  private sanitizer = inject(DomSanitizer);
+  latest: LatestVideos = [];
+  responsiveOptions: ResponsiveOption[] = [];
+  videoTitle: string = '';
+  videoURL: SafeResourceUrl = '';
 
   @ViewChild('staticBackdrop') modal!: ElementRef;
-  ngAfterViewInit() {
-    // Subscribe to the hidden.bs.modal event when the modal is fully closed
-    this.modal.nativeElement.addEventListener(
-      'hidden.bs.modal',
-      this.onModalClosed.bind(this)
-    );
-  }
-  onModalClosed() {
-    // Function to stop the video playback
-    const iframe = this.modal.nativeElement.querySelector('iframe');
-    iframe.src = '';
-  }
 
-  ngOnInit() {
-    this._latestService.getLatest().subscribe((res) => {
-      this.latest = res;
-      // console.log(res)
-      // console.log(res[0].snippet.thumbnails.maxres.url);
+  constructor(
+    private latestService: LatestVideosService,
+    private sanitizer: DomSanitizer
+  ) {}
+
+  ngOnInit(): void {
+    this.latestService.getLatest().subscribe({
+      next: (data: LatestVideos) => {
+        this.latest = data;
+      },
+      error: (error) => {
+        console.error('Failed to fetch latest videos:', error);
+      },
     });
 
     this.responsiveOptions = [
@@ -80,11 +71,23 @@ export class HomePageComponent implements OnInit {
     ];
   }
 
-  openVideoModal(videoId: string, videoTitle: string): void {
-    this.videoId = videoId;
-    this.videoTitle = videoTitle;
+  openVideoModal(video_id: string, video_title: string) {
+    this.videoTitle = video_title;
     this.videoURL = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${videoId}`
+      'https://www.youtube.com/embed/' + video_id
     );
+  }
+  ngAfterViewInit() {
+    // Subscribe to the hidden.bs.modal event when the modal is fully closed
+    this.modal.nativeElement.addEventListener(
+      'hidden.bs.modal',
+      this.onModalClosed.bind(this)
+    );
+  }
+
+  onModalClosed() {
+    // Function to stop the video playback
+    const iframe = this.modal.nativeElement.querySelector('iframe');
+    iframe.src = '';
   }
 }

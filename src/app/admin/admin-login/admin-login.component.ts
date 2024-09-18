@@ -1,11 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { AuthAdminService } from '../../services/auth-admin.service';
+import { LoginAdmin } from '../../interface/adminDashboard';
 
 @Component({
   selector: 'app-admin-login',
@@ -24,18 +31,19 @@ import { AuthAdminService } from '../../services/auth-admin.service';
 })
 export class AdminLoginComponent {
   error: string = '';
+  isLoading: boolean = false;
+  invalidCredentials: string = '';
 
-  constructor(
-    private _Router: Router,
-    private http: HttpClient,
-    private AuthService: AuthAdminService
-  ) {}
+  constructor(private _Router: Router, private AuthService: AuthAdminService) {
+    const adminToken = sessionStorage.getItem('adminToken');
+    if (adminToken !== null) {
+      this._Router.navigate(['admin/dashboard']);
+    }
+  }
 
   loginAdminForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
-    password: new FormControl(null, [
-      Validators.required,
-    ]),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   submitlogin() {
@@ -44,14 +52,20 @@ export class AdminLoginComponent {
     formdata.append('email', this.loginAdminForm.get('email')?.value);
     formdata.append('password', this.loginAdminForm.get('password')?.value);
 
+    this.isLoading = true;
     this.AuthService.loginAdmin(formdata).subscribe({
-      next: (res) => {
+      next: (res: LoginAdmin) => {
+        this.isLoading = false;
         sessionStorage.setItem('adminToken', res.token);
+        sessionStorage.setItem('isSidebarExpanded', 'true');
         this._Router.navigate(['admin/dashboard']);
       },
-      error: (err) => console.log(err.error.error),
-
-      complete: () => {},
+      error: (err) => {
+        this.isLoading = false;
+        if (err.error.error === 'Invalid credentials') {
+          this.invalidCredentials = 'Invalid credentials';
+        }
+      },
     });
   }
 }

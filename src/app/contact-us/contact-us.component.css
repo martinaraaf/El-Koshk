@@ -1,15 +1,160 @@
-/* to make fotter at bottom  */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
+/* NgOptimizedImage can be applied later on to enhance the performance */
+.get-in-touch {
+  /* can be changed later  */
+  min-height: 110vh;
+  background-color: var(--main-color);
+  overflow: hidden;
 }
-app-footer {
-  margin-top: auto;
+.lg-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
 }
-app-header {
-    position: sticky;
-    top: 0;
+.med-image {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
 }
-/* the end  */
+.container-fluid {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-family: "Gotham-Black", sans-serif;
+}
+.message {
+  height: 350px;
+  resize: none;
+}
+.phone,
+.email {
+  font-size: 1.8rem;
+  font-family: "Gotham-Black", sans-serif;
+}
+.phone-number,
+.email-address {
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-family: "Helvetica-light", sans-serif;
+}
+input::placeholder,
+textarea::placeholder,
+button {
+  font-family: "Rock", "sans-serif";
+  letter-spacing: 1px;
+}
+@media (min-width: 576px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .message {
+    height: 250px;
+  }
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  .message {
+    height: 300px;
+  }
+  .container-fluid {
+    width: 52%;
+    height: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 4rem;
+  }
+  .message {
+    height: 350px;
+  }
+  .container-fluid {
+    width: 43%;
+  }
+}
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 5.5rem;
+    font-size: 4.7vw;
+  }
+}
+@media (max-width: 1400px) {
+  .container-fluid {
+    margin: 0 !important;
+  }
+  .form-container {
+    margin: 0 !important;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0 !important;
+  }
+}
+@media (max-width: 1200px) {
+  .container-fluid {
+    width: 50%;
+  }
+}
+
+@media (max-width: 992px) {
+  .med-image {
+    display: block;
+    position: static;
+  }
+  .lg-image {
+    display: none;
+  }
+  .container-fluid {
+    position: static;
+    width: 80%;
+  }
+  .form-container {
+    margin: 0 !important;
+  }
+  .form-container {
+    margin: 2rem 0 !important;
+  }
+}
+
+@media (max-width: 786px) {
+  .container-fluid {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container-fluid {
+    width: 100%;
+  }
+  .form-container {
+    padding: 0 24px !important;
+  }
+  .phone,
+  .email {
+    font-size: 1.3rem;
+  }
+  .phone-number,
+  .email-address {
+    font-size: 1.3rem;
+  }
+  .email-address {
+    word-break: break-all; /* Ensures the text breaks at the boundary of the container */
+    overflow-wrap: break-word; /* Allows breaking long words and URLs */
+  }
+}

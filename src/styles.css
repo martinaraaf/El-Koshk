@@ -1,3 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+* {
+  --main-color: #fbc751;
+}
+/* @font-face {
+  font-family: Gotham-Black;
+  src: url("./assets/fonts/Gotham-Black.otf");
+}
+
+@font-face {
+  font-family: Rock;
+  src: url("./assets/fonts/ROCK.TTF");
+}
+
+@font-face {
+  font-family: Helvetica;
+  src: url("./assets/fonts/Helvetica.ttf");
+}
+
+@font-face {
+  font-family: Gotham-Black-Bold;
+  src: url("./assets/fonts/GothamBold.ttf");
+} */
+@font-face {
+  font-family: "Gotham-Black";
+  src: url("./assets/fonts/Gotham-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Rock";
+  src: url("./assets/fonts/ROCK.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("./assets/fonts/Helvetica.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Helvetica-light";
+  src: url("./assets/fonts/helvetica-light-587ebe5a59211.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Gotham-Black-Bold";
+  src: url("./assets/fonts/GothamBold.ttf") format("truetype");
+}

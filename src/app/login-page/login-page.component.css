@@ -1,20 +1,167 @@
-/* to make fotter at bottom  */
-body {
+/* handle mobile view better  */
+main {
+  background-image: url("../../assets/images/LOGIN PAGE/login el-koshk2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-height: 1496px;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+}
+.khatwa {
+  margin-top: 200px;
+  margin-right: 50px;
+}
+.nawrt {
+  margin-bottom: 200px;
+  /* margin-left: 20px; */
+}
+.card-container {
+  margin: 100px 0 250px;
+}
+
+.card-container div:first-child {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.card-container div:first-child img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.card-content img {
+  width: 105%;
+  margin-top: 60px;
+  margin-left: 20px;
+}
+.form-container {
+  margin-top: 48px;
+  padding: 24px;
+  width: 100%;
+}
+form {
+  width: 100%;
+}
+.email-container,
+.password-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.password-container {
+  margin-bottom: 48px;
+}
+.email-container i,
+.password-container i {
+  color: white;
+  margin-right: 40px;
+  font-size: 2rem;
+}
+input {
+  width: 70%;
+  margin-right: 65px;
+}
+input::placeholder {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+.buttons-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
-app-footer {
-  margin-top: auto;
+button {
+  padding: 10px 35px;
+  font-size: 1.25rem;
+  width: 160px;
+  height: 55px;
 }
 
-.gradient-custom {
-  /* fallback for old browsers */
-  background: #2d0e72;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, #2d0e72, rgb(187, 117, 13));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, #2d0e72, rgb(187, 117, 13));
+@media (max-width: 1400px) {
+  .khatwa-container,
+  .nawrt-container {
+    display: none;
+  }
+}
+@media (max-width: 992px) {
+  .card-container {
+    width: 85%;
+  }
+  .form-container {
+    margin-top: 20px;
+  }
+  .card-content img {
+    margin-top: 40px;
+    margin-left: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .card-content img {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  .form-container {
+    margin-top: 0;
+  }
+  .email-container,
+  .password-container {
+    margin-bottom: 16px;
+  }
+  .buttons-container {
+    gap: 5px;
+  }
+}
+@media (max-width: 600px) {
+  main {
+    min-height: 1020px;
+    justify-content: center;
+  }
+  .card-container {
+    width: 80%;
+    margin: 0;
+  }
+  .email-container,
+  .password-container {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+  input {
+    width: 100%;
+    margin-right: 0;
+  }
+  button {
+    padding: 0 25px;
+    font-size: 1rem;
+    width: 120px;
+    height: 43px;
+  }
+  .email-container i,
+  .password-container i {
+    margin-right: 20px;
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 450px) {
+  button {
+    width: 120px;
+    height: 35px;
+  }
 }

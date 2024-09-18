@@ -1,9 +1,14 @@
-/* to make fotter at bottom  */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.hero-section {
+  aspect-ratio: 32 / 9;
+  background: linear-gradient(#ffffff 40%, #feeebe);
 }
-app-footer {
-  margin-top: auto;
+.portfolios {
+  background: linear-gradient(#feeebe 5%, #fdd661);
+}
+.student-card {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
 }

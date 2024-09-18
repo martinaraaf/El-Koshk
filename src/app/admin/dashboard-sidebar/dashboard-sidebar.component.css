@@ -77,7 +77,8 @@ li {
   flex: 1 1 auto;
 }
 
-a.sidebar-link {
+a.sidebar-link,
+.logoutBtn.sidebar-link {
   padding: 0.625rem 1.625rem;
   color: #fff;
   display: block;
@@ -139,4 +140,8 @@ a.sidebar-link:hover {
 .navbar {
   background-color: #f5f5f5;
   box-shadow: 0 0 2rem 0 rgba(33, 37, 41, 0.1);
+}
+
+.logout{
+  cursor: pointer;
 }

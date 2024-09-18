@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AuthAdminService } from '../../services/auth-admin.service';
 
 @Component({
@@ -11,16 +11,34 @@ import { AuthAdminService } from '../../services/auth-admin.service';
 })
 export class DashboardSidebarComponent {
   isSidebarExpanded: boolean = true;
+  adminEmail: string = '';
 
-  constructor(private AuthService: AuthAdminService) {}
+  constructor(private _AuthService: AuthAdminService, private _Router: Router) {
+    this.adminEmail = this._AuthService.getAdminEmail();
+  }
+
+  ngOnInit() {
+    const storedState = sessionStorage.getItem('isSidebarExpanded');
+    this.isSidebarExpanded = storedState === 'true';
+  }
+
+  // old
+  // toggleSidebar() {
+  //   this.isSidebarExpanded = !this.isSidebarExpanded;
+  // }
 
   // sidebar toggle
   toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;
+    sessionStorage.setItem(
+      'isSidebarExpanded',
+      this.isSidebarExpanded ? 'true' : 'false'
+    );
   }
 
   // LogOut Admin
   logOut() {
-    this.AuthService.logOutAdmin();
+    this._AuthService.logOutAdmin();
+    this._Router.navigate(['/home']);
   }
 }

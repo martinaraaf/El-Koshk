@@ -1,48 +1,128 @@
-/* to make fotter at bottom  */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+* {
+  --text-color: #f8d020;
+  --secondary-color: rgb(62, 0, 136);
 }
-app-footer {
-  margin-top: auto;
-}
-
-/* .gradient-custom { */
-/* fallback for old browsers */
-/* background: #f093fb; */
-
-/* Chrome 10-25, Safari 5.1-6 */
-/* background: -webkit-linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  ); */
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-/* background: linear-gradient(
-    to bottom right,
-    rgba(240, 147, 251, 1),
-    rgba(245, 87, 108, 1)
-  );
-} */
 section {
-
-    /* Define the gradient */
-    background: linear-gradient(to bottom, #34079d, #fbc751);
-    /* For older browsers */
-    background: -webkit-linear-gradient(top, #34079d, #fbc751);
-    background: -moz-linear-gradient(top, #34079d, #fbc751);
-    background: -o-linear-gradient(top, #34079d, #fbc751);
-
+  min-height: 200vh;
+  background: var(--secondary-color);
+}
+h1 {
+  font-size: 100px;
+  font-family: "Gotham-Black", sans-serif;
+  color: var(--text-color);
+}
+.bottom-image-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 55vh;
+  z-index: 1;
+}
+.box-man-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  object-fit: cover;
+}
+.container-fluid {
+  width: 84%;
+  position: relative;
+  z-index: 10;
+}
+label {
+  font-family: "Rock", sans-serif;
+  font-size: 24px;
+  color: var(--text-color);
+}
+.inputs-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.left-half,
+.right-half {
+  width: 48%;
+}
+.upload-button {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  font-size: 25px;
+}
+.upload-button input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.signup-container button {
+  width: 22%;
+  height: 60px;
+}
+.upload-button {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup-container span {
+  font-size: 20px;
+}
+@media (max-width: 990px) {
+  .inputs-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .left-half,
+  .right-half {
+    width: 100%;
+  }
+  .btn-lg {
+    width: 50%;
+  }
+  .signup-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    height: 80px;
+  }
+  .signup-container button {
+    width: 50%;
+    font-size: 28px;
+  }
+  .signup-container span {
+    text-align: center;
+  }
 }
 
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-  font-size: 1rem;
-  line-height: 2.15;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-}
-.card-registration .select-arrow {
-  top: 13px;
+@media (max-width: 600px) {
+  h1 {
+    font-size: 50px;
+  }
+  label {
+    font-size: 20px !important;
+  }
+  .upload-button {
+    width: 200px;
+    height: 200px;
+  }
 }

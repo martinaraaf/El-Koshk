@@ -1,126 +1,85 @@
-<!-- <footer class="pt-5 mt-5 pb-5">
-  <div class="container-fluid d-flex">
-    <div class="col-1 d-flex align-items-start">
+<footer class="d-flex">
+  <div class="d-flex logo-and-bio">
+    <div class="logo-container">
       <img
-        src="../../assets/images/Landpage/Footer/Logo-Blue.png"
+        src="../../assets/images/Landpage/Footer/Logo-Blueee.png"
         alt="El Koshk logo"
-        class="w-100"
+        class="pt-4"
       />
     </div>
-    <div class="d-flex flex-grow-1">
-      <div class="col-md-4">
-        <p class="px-4 py-3 fw-medium">
-          EL -KOSHK &nbsp; IS &nbsp; A &nbsp;CREATIVE &nbsp; SPACE &nbsp; FOR
-          <br />CHILDREN UNDER 18 YEARS&nbsp; OLD&nbsp; WHERE <br />THEY CAN
-          LEARN HOW TO MAKE CINEMA<br />
-          AND DIGITAL CONTENT.
-        </p>
-      </div>
-      <div class="flex-grow-1">
-        <ul style="list-style-type: square" class="px-4 py-3 fw-bold fs-4">
-          <li class="nav-item">
-            <a routerLink="/home" class="nav-link">HOME</a>
-          </li>
-          <li><a routerLink="/portfolios" class="nav-link">PORTFOLIOS</a></li>
-          <li><a routerLink="/aboutus" class="nav-link">ABOUT US</a></li>
-          <li><a routerLink="/contactus" class="nav-link">CONTACT US</a></li>
-        </ul>
-      </div>
-      <div>
-        <P class="fw-bold fs-4 mb-0">SOCIAL MEDIA</P>
-        <div class="gap-3 d-flex">
-          <a href=""
-            ><img
-              src="../../assets/images/Landpage/Footer/Social Media Icons/YouTube.png"
-              alt=""
-          /></a>
-          <a href=""
-            ><img
-              src="../../assets/images/Landpage/Footer/Social Media Icons/Facebook.png"
-              alt=""
-          /></a>
-          <a href=""
-            ><img
-              src="../../assets/images/Landpage/Footer/Social Media Icons/Instagram.png"
-              alt=""
-          /></a>
-          <a href=""
-            ><img
-              src="../../assets/images/Landpage/Footer/Social Media Icons/TikTok.png"
-              alt=""
-          /></a>
-        </div>
-        <div class="fw-medium">
-          &#169; EL -KOSHK ALL RIGHTS RESERVED. ALL IMAGES<br />
-          AND &nbsp;MATERIALS&nbsp; ARE&nbsp; COPYRIGHT&nbsp; PROTECTED<br />
-          AND ARE THE PROPERTY OF EL -KOSHK
-        </div>
-      </div>
-    </div>
-  </div>
-</footer> -->
-
-<!-- new footer  -->
-<footer class="pt-5 pb-5 d-flex">
-  <div class="col-lg-5 d-flex justify-content-center firstHalf">
-    <div class="d-flex align-items-start">
-      <img
-        src="../../assets/images/Landpage/Footer/Logo-Blue.png"
-        alt="El Koshk logo"
-        class="img-fluid"
-      />
-    </div>
-    <div class="pt-4">
-      <p class="px-4 py-3 fw-medium">
+    <div class="pt-4 el-koshk-bio">
+      <p>
         EL-KOSHK &nbsp; IS &nbsp; A &nbsp;CREATIVE &nbsp; SPACE &nbsp; FOR
-        <br />CHILDREN UNDER 18 YEARS&nbsp; OLD&nbsp; WHERE <br />THEY CAN LEARN
-        HOW TO MAKE CINEMA<br />
-        AND DIGITAL CONTENT.
+        CHILDREN UNDER 18 YEARS&nbsp; OLD&nbsp; WHERE THEY CAN LEARN HOW TO MAKE
+        CINEMA AND DIGITAL CONTENT.
       </p>
     </div>
   </div>
-  <div class="col-lg-7 d-flex justify-content-around secondHalf">
+  <div class="d-flex justify-content-around links-and-social-media">
     <div class="pt-3">
-      <ul style="list-style-type: square" class="px-4 py-3 fw-bold fs-4">
+      <ul class="fw-medium links">
         <li class="nav-item">
+          <i class="fa-solid fa-square"></i>
           <a routerLink="/home" class="nav-link">HOME</a>
         </li>
-        <li><a routerLink="/portfolios" class="nav-link">PORTFOLIOS</a></li>
-        <li><a routerLink="/aboutus" class="nav-link">ABOUT US</a></li>
-        <li><a routerLink="/contactus" class="nav-link">CONTACT US</a></li>
+        <li>
+          <i class="fa-solid fa-square"></i>
+          <a routerLink="/portfolios" class="nav-link">PORTFOLIOS</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-square"></i>
+          <a routerLink="/aboutus" class="nav-link">ABOUT US</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-square"></i>
+          <a routerLink="/contactus" class="nav-link">CONTACT US</a>
+        </li>
         @if (!isLogged){
-        <li><a routerLink="/login" class="nav-link">LOGIN</a></li>
+        <li>
+          <i class="fa-solid fa-square"></i>
+          <a routerLink="/login" class="nav-link">LOGIN</a>
+        </li>
         }
       </ul>
     </div>
-    <div class="pt-4">
-      <P class="fw-bold fs-4 mb-0">SOCIAL MEDIA</P>
+    <div class="pt-3 social-media">
+      <P class="mb-0">SOCIAL MEDIA</P>
       <div class="gap-3 d-flex">
-        <a href=""
+        <a href="https://www.youtube.com/@El_Koshk_studio" target="_blank"
           ><img
             src="../../assets/images/Landpage/Footer/Social Media Icons/YouTube.png"
-            alt=""
+            alt="YouTube"
+            class="img-fluid"
         /></a>
-        <a href=""
+        <a
+          href="https://www.facebook.com/EL.Koshk.Studio?mibextid=kFxxJD"
+          target="_blank"
           ><img
             src="../../assets/images/Landpage/Footer/Social Media Icons/Facebook.png"
-            alt=""
+            alt="Facebook"
+            class="img-fluid"
         /></a>
-        <a href=""
+        <a
+          href="https://www.instagram.com/el_koshk_studio?igsh=ZHNzNTByc3N3MGJr"
+          target="_blank"
           ><img
             src="../../assets/images/Landpage/Footer/Social Media Icons/Instagram.png"
-            alt=""
+            alt="Instagram"
+            class="img-fluid"
         /></a>
-        <a href=""
+        <a
+          href="https://www.tiktok.com/@el.koshk.studio?_t=8oNUifnxzGS&_r=1"
+          target="_blank"
           ><img
             src="../../assets/images/Landpage/Footer/Social Media Icons/TikTok.png"
-            alt=""
+            alt="TikTok"
+            class="img-fluid"
         /></a>
       </div>
-      <div class="fw-medium">
-        &copy; EL-KOSHK ALL RIGHTS RESERVED. ALL IMAGES<br />
-        AND &nbsp;MATERIALS&nbsp; ARE&nbsp; COPYRIGHT&nbsp; PROTECTED<br />
-        AND ARE THE PROPERTY OF EL-KOSHK
+      <div class="fw-medium pt-2">
+        &copy; EL-KOSHK ALL RIGHTS RESERVED. ALL IMAGES AND
+        &nbsp;MATERIALS&nbsp; ARE&nbsp; COPYRIGHT&nbsp; PROTECTED AND ARE THE
+        PROPERTY OF EL-KOSHK.
       </div>
     </div>
   </div>

@@ -7,22 +7,50 @@
       <h2 class="text-start p-3">Manage Videos</h2>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-3">
+          <div class="col-12 col-md-6 col-lg-3" (click)="filterVideos('all')">
             <div class="card border-0">
               <div class="card-body py-4">
-                <h5 class="mb-2 fw-bold">Approved</h5>
-                <p class="mb-2 fw-bold">{{ approvedVideos }}</p>
+                <h5 class="mb-2 fw-bold text-primary">All</h5>
+                <p class="mb-2 fw-bold text-primary">{{ allVideosNum }}</p>
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-6 col-lg-3">
+          <div
+            class="col-12 col-md-6 col-lg-3"
+            (click)="filterVideos('approved')"
+          >
             <div class="card border-0">
               <div class="card-body py-4">
-                <h5 class="mb-2 fw-bold">Pending</h5>
-                <p class="mb-2 fw-bold">{{ pendingVideos }}</p>
+                <h5 class="mb-2 fw-bold text-success">Approved</h5>
+                <p class="mb-2 fw-bold text-success">{{ approvedVideosNum }}</p>
               </div>
             </div>
           </div>
+          <div
+            class="col-12 col-md-6 col-lg-3"
+            (click)="filterVideos('pending')"
+          >
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold text-warning">Pending</h5>
+                <p class="mb-2 fw-bold text-warning">{{ pendingVideosNum }}</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-6 col-lg-3"
+            (click)="filterVideos('denied')"
+          >
+            <div class="card border-0">
+              <div class="card-body py-4">
+                <h5 class="mb-2 fw-bold text-danger">Denied</h5>
+                <p class="mb-2 fw-bold text-danger">{{ deniedVideosNum }}</p>
+              </div>
+            </div>
+          </div>
+          @if (filteredVideos.length===0) {
+            <h2 class="text-center py-5">No videos found</h2>
+          } @if (filteredVideos.length > 0) {
           <div class="col-12">
             <table class="table table-striped">
               <thead>
@@ -37,7 +65,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for (video of videos; track $index) {
+                @for (video of filteredVideos; track $index) {
                 <tr>
                   <th scope="row">{{ video.id }}</th>
                   <td>
@@ -52,16 +80,71 @@
                   <td>{{ video.title }}</td>
                   <td><img [src]="video.thumbnail_url" alt="" /></td>
                   <td>{{ video.user.name }}</td>
-                  <td>{{ video.status }}</td>
-                  <td class="">
-                    <!-- <button class="btn btn-success">Approve</button> -->
-                    <button class="btn btn-danger">Delete</button>
+                  @if (video.status==="pending") {
+                  <td>
+                    <i
+                      class="fa-solid fa-hourglass-end"
+                      style="color: #ffd43b"
+                    ></i>
+                    {{ video.status }}
                   </td>
+                  <td class="">
+                    <div class="d-block mb-1">
+                      <button
+                        class="btn btn-md btn-success"
+                        (click)="approveVideo(video.video_id)"
+                      >
+                        Approve
+                      </button>
+                    </div>
+                    <div class="d-block">
+                      <button
+                        class="btn btn-md btn-danger"
+                        (click)="denyVideo(video.video_id)"
+                      >
+                        Deny
+                      </button>
+                    </div>
+                  </td>
+                  } @if (video.status==="approved") {
+                  <td>
+                    <i
+                      class="fa-solid fa-circle-check"
+                      style="color: #00c800"
+                    ></i>
+                    {{ video.status }}
+                  </td>
+                  <td class="">
+                    <button
+                      class="btn btn-md btn-danger mx-1"
+                      (click)="denyVideo(video.video_id)"
+                    >
+                      Deny
+                    </button>
+                  </td>
+                  } @if (video.status==="denied") {
+                  <td>
+                    <i
+                      class="fa-solid fa-circle-xmark"
+                      style="color: #ff0000"
+                    ></i>
+                    {{ video.status }}
+                  </td>
+                  <td class="">
+                    <button
+                      class="btn btn-md btn-success mx-1"
+                      (click)="approveVideo(video.video_id)"
+                    >
+                      Approve
+                    </button>
+                  </td>
+                  }
                 </tr>
                 }
               </tbody>
             </table>
           </div>
+          }
         </div>
       </div>
     </div>

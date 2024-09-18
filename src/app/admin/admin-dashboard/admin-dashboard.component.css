@@ -39,7 +39,6 @@ li {
 .card {
   background-color: #f5f5f5;
   transition: 0.4s;
-  cursor: pointer;
   color: #000;
   margin-bottom: 1rem;
 }

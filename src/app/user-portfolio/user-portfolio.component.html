@@ -1,8 +1,12 @@
-<body>
+<main>
   <app-header></app-header>
-  @if(user){
   <div class="container py-4">
     <h1 class="mb-4">My Portfolio</h1>
+
+    <!-- loading spinner for now  -->
+    <div *ngIf="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
 
     <!-- User Information -->
     <div class="card mb-4">
@@ -15,47 +19,30 @@
           </div>
           <div class="w-50">
             <p>Account Type: {{ user.type }}</p>
-            <p>Phone Number: +20{{ user.phone_number }}</p>
+            <p>Phone Number: 0{{ user.phone_number }}</p>
           </div>
         </div>
-        <a class="btn btn-primary mx-3 px-4" routerLink="update">Edit</a>
+        <a class="btn btn-primary mx-3 px-4" routerLink="edit">Edit</a>
       </div>
     </div>
 
     <!-- Current Videos -->
-    @if(userVideos.length > 0){
     <div class="card mb-4">
       <div class="card-body">
         <h2 class="card-title">Current Videos</h2>
         <div class="card-deck row">
-          @for(video of userVideos; track video){
+          @for (video of userVideos; track $index) {
           <div class="card col-lg-6 col-mid-12 p-0">
             <iframe
               class="card-img-top"
               style="aspect-ratio: 16/9"
-              [src]="getVideoUrl(video.video_id)"
+              [src]="video.video_id"
               frameborder="0"
               allowfullscreen
             ></iframe>
             <div class="card-body">
               <h5 class="card-title video-title">{{ video.title }}</h5>
               <div class="d-flex justify-content-between">
-                <p class="card-text">
-                  @if(video.verified === 1){ Status:
-                  <span
-                    >Approved
-                    <i class="fas fa-check-circle text-success"></i>
-                  </span>
-                  } @if(video.verified === 0){ Status:
-                  <span
-                    >Pending
-                    <i
-                      class="fa-solid fa-hourglass-end"
-                      style="color: #ffd43b"
-                    ></i>
-                  </span>
-                  }
-                </p>
                 <button class="btn btn-danger">Delete</button>
               </div>
             </div>
@@ -64,7 +51,6 @@
         </div>
       </div>
     </div>
-    }
 
     <!-- Add New Video Form -->
     <div class="card">
@@ -72,19 +58,31 @@
         <h2 class="card-title">Add New Video</h2>
         <form
           class="w-75"
-          enctype="multipart/form-data"
-          (ngSubmit)="addVideo(addVideoform)"
-          [formGroup]="addVideoform"
+          #addVideoForm="ngForm"
+          (ngSubmit)="addVideo(addVideoForm)"
         >
           <div class="mb-3">
             <input
               type="text"
               class="form-control"
               id="youtubeUrl"
+              name="link"
+              ngModel
+              #youtubeUrlModel="ngModel"
               placeholder="Enter YouTube URL"
-              formControlName="youtubeUrl"
+              pattern="^(https?\:\/\/)?(www\.youtube\.com\/watch\?v=|youtu\.be\/)[\w-]{11}(\?[\w=&]*)?$"
+              required
             />
           </div>
+          @if (youtubeUrlModel.invalid && youtubeUrlModel.touched) {
+          <div class="text-danger mb-1 p-0">
+            @if (youtubeUrlModel.errors?.['required']) {
+            <small *ngIf=""> YouTube URL is required </small>
+            } @if (youtubeUrlModel.errors?.['pattern']) {
+            <small> Invalid YouTube URL </small>
+            }
+          </div>
+          }
           <!-- Tips for the user -->
           <div class="alert alert-info mb-3">
             Before submitting, make sure:
@@ -96,8 +94,8 @@
           </div>
           <button
             type="submit"
-            class="btn btn-primary"
-            [disabled]="addVideoform.controls['youtubeUrl'].value === ''"
+            class="btn btn-primary btn-lg"
+            [disabled]="addVideoForm.invalid"
           >
             Submit
           </button>
@@ -105,7 +103,7 @@
       </div>
     </div>
     <!-- Modal, only shown if API call is successful -->
-    @if(isYTUrlSuccessful){
+    <!-- @if(isYTUrlSuccessful){
     <div
       class="modal fade"
       id="exampleModal"
@@ -126,7 +124,6 @@
             ></button>
           </div>
           <div class="modal-body">
-            <!-- Modal body content here -->
             The video link has been successfully uploaded and is currently
             awaiting approval.
           </div>
@@ -138,13 +135,27 @@
             >
               Close
             </button>
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
           </div>
         </div>
       </div>
     </div>
-    }
+    } -->
   </div>
-  }
   <app-footer></app-footer>
-</body>
+</main>
+<!-- <p class="card-text">
+                  @if(video.verified === 1){ Status:
+                  <span
+                    >Approved
+                    <i class="fas fa-check-circle text-success"></i>
+                  </span>
+                  } @if(video.verified === 0){ Status:
+                  <span
+                    >Pending
+                    <i
+                      class="fa-solid fa-hourglass-end"
+                      style="color: #ffd43b"
+                    ></i>
+                  </span>
+                  }
+                </p> -->

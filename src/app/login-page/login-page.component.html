@@ -1,99 +1,67 @@
-<body>
-  <app-header></app-header>
-  <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem">
-            <div class="card-body p-5 text-center">
-              <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                <p class="text-white-50 mb-5">
-                  Please enter your email and password!
-                </p>
-                <form
-                  enctype="multipart/form-data"
-                  (ngSubmit)="submitLogin(loginform)"
-                  [formGroup]="loginform"
-                >
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    @if ( loginform.get('email')?.errors &&
-                    loginform.get('email')?.touched) {
-                    <div class="alert text-danger m-0 p-0">
-                      @if ( loginform.get('email')?.getError('required') ) {
-                      <p class="m-0">Email is required</p>
-                      } @if( loginform .get('email') ?.getError('email') ) {
-                      <p class="m-0">Email is not valid</p>
-                      }
-                    </div>
-                    }
-                    <input
-                      type="email"
-                      id="email"
-                      class="form-control form-control-lg"
-                      autocomplete="off"
-                      formControlName="email"
-                    />
-                    <label class="form-label" for="email">Email</label>
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline form-white mb-4">
-                    @if ( loginform.get('password')?.errors &&
-                    loginform.get('password')?.touched) {
-                    <div class="alert text-danger m-0 p-0">
-                      @if ( loginform.get('password')?.getError('required') ) {
-                      <p class="m-0">Password is required</p>
-                      } @if( loginform .get('password') ?.getError('minlength')
-                      ) {
-                      <p class="m-0">Minimum length is 8</p>
-                      }
-                    </div>
-                    }
-                    <input
-                      type="password"
-                      id="password"
-                      formControlName="password"
-                      class="form-control form-control-lg"
-                    />
-                    <label class="form-label" for="password">Password</label>
-                  </div>
-                  <!-- forgot password  -->
-                  <!-- <p class="small mb-5 pb-lg-2">
-                  <a class="text-white-50" href="#!">Forgot password?</a>
-                </p> -->
-                  <div
-                    *ngIf="invalidCredentials"
-                    class="alert text-danger m-0 p-0"
-                  >
-                    <p>
-                      Invalid email or password. Please check your credentials
-                      and try again.
-                    </p>
-                  </div>
-                  <input
-                    data-mdb-button-init
-                    data-mdb-ripple-init
-                    class="btn btn-outline-light btn-lg px-5"
-                    type="submit"
-                    [disabled]="loginform.invalid"
-                    value="Login"
-                  />
-                </form>
-              </div>
-
-              <div>
-                <p class="mb-0">
-                  Don't have an account?
-                  <a routerLink="/joinus" class="text-white-50 fw-bold"
-                    >Sign Up</a
-                  >
-                </p>
-              </div>
+<app-header></app-header>
+<main class="">
+  <div class=" khatwa-container">
+    <img src="../../assets/images/LOGIN PAGE/TEXT/Layer-37-copy.png" alt="" class="khatwa img-fluid"/>
+  </div>
+  <div class="card-container">
+    <div>
+      <img
+        src="../../assets/images/LOGIN PAGE/Window/form-bg.png"
+        alt="form-background"
+      />
+      <div class="card-content">
+        <img src="../../assets/images/LOGIN PAGE/kidss.png" alt="characters" />
+        <div class="form-container">
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="email-container">
+              <i class="fa-solid fa-user"></i>
+              <input
+                type="email"
+                id="email"
+                class="form-control form-control-lg bg-transparent border-4 border-light rounded-5 text-light"
+                formControlName="email"
+                autocomplete="email"
+                placeholder="E-MAIL"
+              />
             </div>
-          </div>
+            <div class="password-container">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                class="form-control form-control-lg bg-transparent border-4 border-light rounded-5 text-light"
+                formControlName="password"
+                autocomplete="current-password"
+                placeholder="PASSWORD"
+              />
+            </div>
+            @if (invalidCredentials) {
+            <div class="m-0 p-0 text-warning text-center">
+              <p class="m-0">Invalid credentials</p>
+            </div>
+            }
+            <div class="buttons-container">
+              <button
+                class="btn btn-lg bg-light text-black row justify-content-center"
+                type="submit"
+                [disabled]="!loginForm.valid"
+              >
+                @if (!isLoading) { <span>LOGIN</span> } @if (isLoading) {
+                <i class="fas fa-spinner fa-spin" style="color: #000000"></i>
+                }
+              </button>
+              <a routerLink="/joinus">
+                <button class="btn btn-lg bg-transparent text-light">
+                  SIGN UP
+                </button>
+              </a>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
-  <app-footer></app-footer>
-</body>
+  </div>
+  <div class=" nawrt-container">
+    <img src="../../assets/images/LOGIN PAGE/TEXT/Layer-36.png" alt="" class="nawrt img-fluid"/>
+  </div>
+</main>
